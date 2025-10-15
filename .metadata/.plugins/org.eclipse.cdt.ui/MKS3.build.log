@@ -1,17 +1,24 @@
-12:33:08 **** Incremental Build of configuration Debug for project MKS3 ****
+12:03:34 **** Incremental Build of configuration Debug for project MKS3 ****
 make -j4 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F030x8 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:102:3: warning: implicit declaration of function 'sct_init' [-Wimplicit-function-declaration]
+  102 |   sct_init();
+      |   ^~~~~~~~
+../Core/Src/main.c:116:11: warning: implicit declaration of function 'sct_value' [-Wimplicit-function-declaration]
+  116 |           sct_value(pot_value, bargraph);
+      |           ^~~~~~~~~
 arm-none-eabi-gcc -o "MKS3.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Temp\268094\MKS\MKS3\STM32F030R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MKS3.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: MKS3.elf
  
 arm-none-eabi-size  MKS3.elf 
 arm-none-eabi-objdump -h -S MKS3.elf  > "MKS3.list"
    text	   data	    bss	    dec	    hex	filename
-   9276	     12	   1780	  11068	   2b3c	MKS3.elf
+  12328	     12	   1852	  14192	   3770	MKS3.elf
 Finished building: default.size.stdout
  
 Finished building: MKS3.list
  
 
-12:33:10 Build Finished. 0 errors, 0 warnings. (took 1s.144ms)
+12:03:35 Build Finished. 0 errors, 2 warnings. (took 927ms)
 

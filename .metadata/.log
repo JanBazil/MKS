@@ -68,3 +68,23 @@ java.lang.Exception: Resource '/MKS3' does not exist.
 
 !ENTRY org.eclipse.cdt.core 1 0 2025-10-08 11:25:06.305
 !MESSAGE Indexed 'MKS3' (21 sources, 83 headers) in 2.7 sec: 4,620 declarations; 28,125 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0061%)
+!SESSION 2025-10-15 11:28:36.883 -----------------------------------------------
+eclipse.buildId=Version 1.19.0
+java.version=21.0.3
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2025-10-15 11:29:04.542
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2025-10-15 11:29:04.558
+!MESSAGE Log4j2 initialized with config file C:\Temp\268094\MKS\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2025-10-15 11:29:11.293
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.core.resources 2 2 2025-10-15 12:08:28.563
+!MESSAGE Save operation warnings.
+!SUBENTRY 1 org.eclipse.core.resources 2 234 2025-10-15 12:08:28.563
+!MESSAGE The project description file (.project) for 'MKS3' was missing.  This file contains important information about the project.  A new project description file has been created, but some information about the project may have been lost.
