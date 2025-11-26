@@ -1,0 +1,17 @@
+12:57:43 **** Incremental Build of configuration Debug for project MKS9 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F429xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "MKS9.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Temp\268094\MKS\MKS9\STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MKS9.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: MKS9.elf
+ 
+arm-none-eabi-size  MKS9.elf 
+arm-none-eabi-objdump -h -S MKS9.elf  > "MKS9.list"
+   text	   data	    bss	    dec	    hex	filename
+  34872	    284	   4164	  39320	   9998	MKS9.elf
+Finished building: default.size.stdout
+ 
+Finished building: MKS9.list
+ 
+
+12:57:45 Build Finished. 0 errors, 0 warnings. (took 1s.594ms)
+
