@@ -1,0 +1,21 @@
+13:43:09 **** Incremental Build of configuration Debug for project mks5 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F030x8 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:210:27: warning: unused variable 'c' [-Wunused-variable]
+  210 |                   uint8_t c;
+      |                           ^
+arm-none-eabi-gcc -o "mks5.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Temp\268094\MKS\mks5\STM32F030R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="mks5.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: mks5.elf
+ 
+arm-none-eabi-size  mks5.elf 
+arm-none-eabi-objdump -h -S mks5.elf  > "mks5.list"
+   text	   data	    bss	    dec	    hex	filename
+  20896	    104	   2520	  23520	   5be0	mks5.elf
+Finished building: default.size.stdout
+ 
+Finished building: mks5.list
+ 
+
+13:43:10 Build Finished. 0 errors, 1 warnings. (took 1s.240ms)
+
