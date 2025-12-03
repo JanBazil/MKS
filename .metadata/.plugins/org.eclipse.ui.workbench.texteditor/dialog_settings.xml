@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<item key="hasShownOverlayPopupBefore" value="true"/>
-	<item key="replaceBarOpen" value="false"/>
+	<item key="replaceBarOpen" value="true"/>
 	<list key="searchhistory">
+		<item value="tcpecho"/>
 		<item value="lis2dw12_usr_offset_z_set"/>
+	</list>
+	<list key="replacehistory">
+		<item value="telnet"/>
 	</list>
 </section>
