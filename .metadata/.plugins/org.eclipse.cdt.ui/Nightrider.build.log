@@ -1,0 +1,20 @@
+15:11:05 **** Incremental Build of configuration Debug for project Nightrider ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/sct.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F030x8 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sct.d" -MT"Core/Src/sct.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/sct.o"
+../Core/Src/sct.c:10:18: warning: 'Get_SpinDirection' defined but not used [-Wunused-function]
+   10 | static sct_dir_t Get_SpinDirection(void)
+      |                  ^~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "Nightrider.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Temp\268094\MKS\Nightrider\STM32F030R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Nightrider.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Nightrider.elf
+ 
+arm-none-eabi-size  Nightrider.elf 
+arm-none-eabi-objdump -h -S Nightrider.elf  > "Nightrider.list"
+   text	   data	    bss	    dec	    hex	filename
+   8264	     12	   1708	   9984	   2700	Nightrider.elf
+Finished building: default.size.stdout
+ 
+Finished building: Nightrider.list
+ 
+
+15:11:06 Build Finished. 0 errors, 1 warnings. (took 1s.86ms)
+

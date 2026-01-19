@@ -1,0 +1,131 @@
+/*
+ * sct.c
+ *
+ *  Created on: Oct 8, 2025
+ *      Author: 268094
+ */
+
+#ifndef SRC_SCT_C_
+#define SRC_SCT_C_
+
+#include "sct.h"
+
+typedef enum
+{
+    SCT_DIR_CW = 0,
+    SCT_DIR_CCW
+} sct_dir_t;
+
+void SCT_SpinStep(sct_dir_t dir);
+
+static sct_dir_t Get_SpinDirection(void)
+{
+    GPIO_PinState s1 = HAL_GPIO_ReadPin(S1_GPIO_Port, S1_Pin); // PC1
+    GPIO_PinState s2 = HAL_GPIO_ReadPin(S2_GPIO_Port, S2_Pin); // PC0
+
+    /* S1 pressed, S2 released → clockwise */
+    if (s1 == GPIO_PIN_RESET && s2 == GPIO_PIN_SET)
+        return SCT_DIR_CW;
+
+    /* S2 pressed, S1 released → counter-clockwise */
+    if (s2 == GPIO_PIN_RESET && s1 == GPIO_PIN_SET)
+        return SCT_DIR_CCW;
+
+    /* Both pressed or both released → keep last direction */
+    static sct_dir_t last_dir = SCT_DIR_CW;
+    return last_dir;
+}
+
+static void sct(uint32_t value)
+{
+    for (uint32_t i = 0; i < 32; i++)
+    {
+        HAL_GPIO_WritePin(
+            SCT_SDI_GPIO_Port,
+            SCT_SDI_Pin,
+            (value >> i) & 0x1 ? GPIO_PIN_SET : GPIO_PIN_RESET
+        );
+
+        HAL_GPIO_WritePin(SCT_CLK_GPIO_Port, SCT_CLK_Pin, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(SCT_CLK_GPIO_Port, SCT_CLK_Pin, GPIO_PIN_RESET);
+    }
+
+    /* Latch output */
+    HAL_GPIO_WritePin(SCT_NLA_GPIO_Port, SCT_NLA_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(SCT_NLA_GPIO_Port, SCT_NLA_Pin, GPIO_PIN_RESET);
+}
+
+void sct_init()
+{
+	sct(0);
+}
+
+
+static const uint32_t reg_values[3][6] =
+{
+    {
+        // PCDE--------GFAB @ DIS1
+        0b0000000000000001 << 16, // A
+        0b0000000000000010 << 16, // B
+        0b0000000000000100 << 16, // C
+        0b0000000000001000 << 16, // D
+        0b0001000000000000 << 16, // E
+        0b0010000000000000 << 16, // F
+    },
+    {
+        // ----PCDEGFAB---- @ DIS2
+        0b0000000000000001 << 0,
+        0b0000000000000010 << 0,
+        0b0000000000000100 << 0,
+        0b0000000000001000 << 0,
+        0b0001000000000000 << 0,
+        0b0010000000000000 << 0,
+    },
+    {
+        // PCDE--------GFAB @ DIS3
+        0b0000000000000001 << 0,
+        0b0000000000000010 << 0,
+        0b0000000000000100 << 0,
+        0b0000000000001000 << 0,
+        0b0001000000000000 << 0,
+        0b0010000000000000 << 0,
+    }
+};
+
+void Spin_All_Displays(uint8_t direction)
+{
+	static uint8_t spin_idx = 0;
+	uint32_t value = 0;
+
+	value |= reg_values[0][spin_idx];
+	value |= reg_values[1][spin_idx];
+	value |= reg_values[2][spin_idx];
+
+	sct(value);
+
+	spin_idx++;
+	if (spin_idx >= 6)
+		spin_idx = 0;
+}
+
+void SCT_SpinStep(sct_dir_t dir)
+{
+    static int8_t spin_idx = 0;
+
+    SCT_Shift32(
+        reg_values[0][spin_idx] |
+        reg_values[1][spin_idx] |
+        reg_values[2][spin_idx]
+    );
+
+    if (dir == SCT_DIR_CW)
+    {
+        spin_idx = (spin_idx + 1) % 6;
+    }
+    else
+    {
+        spin_idx = (spin_idx == 0) ? 5 : spin_idx - 1;
+    }
+}
+
+#endif /* SRC_SCT_C_ */

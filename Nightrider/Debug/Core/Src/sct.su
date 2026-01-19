@@ -1,0 +1,5 @@
+../Core/Src/sct.c:10:18:Get_SpinDirection	24	static
+../Core/Src/sct.c:28:13:sct	24	static
+../Core/Src/sct.c:47:6:sct_init	8	static
+../Core/Src/sct.c:84:6:Spin_All_Displays	24	static
+../Core/Src/sct.c:100:6:SCT_SpinStep	16	static
